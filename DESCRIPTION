@@ -21,3 +21,5 @@ Suggests:
     Matrix
 VignetteBuilder: knitr
 RoxygenNote: 5.0.1
+URL: http://github.com/grafab/pergola
+BugReports: http://github.com/grafab/pergola/issues

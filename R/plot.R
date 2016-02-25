@@ -1,6 +1,7 @@
 #' Plot recombination frequencies
 #' 
-#' Graphical representation of recombination frequencies to support supervised estimation of the numbers of clusters
+#' Graphical representation of recombination frequencies to support supervised estimation
+#' of the numbers of clusters
 #'  
 #' @param rf Matrix of pairwise recombination frequencies.  
 #' @param plottype Default is "dendrogram". Any other value will plot the recombination frequencies.
@@ -12,7 +13,7 @@
 #' simTetrageno<-bases2genotypes(simTetra,4)
 #' rfMat<-calcRec(simTetrageno,4)
 #' plotRf(calcRec)
-#' @keywords internal
+#' @export
 plotRf <- function(rf, plottype = "dendrogram", method = "single", cex.axis = 1, ...){
   tree<-hclust(as.dist(rf), method = method)
   if(plottype == "dendrogram"){

@@ -4,7 +4,9 @@ Title: Toolbox for polyploid genetic data
 Version: 1.0
 Date: 2014-12-12
 Authors@R: person("Fabian", "Grandke", email = "grafabian@gmail.com",
-  role = c("aut", "cre"))
+  role = c("aut", "cre")),
+  person("Dirk", "Metzler", email = "metzler@bio.lmu.de",
+  role = c("ths"))
 Description: This package provides tools for linkage mapping in polyploids.
     It implements the method PERGOLA, which is a fast, deterministic method to
     calculate the order of markers in a linkage group.

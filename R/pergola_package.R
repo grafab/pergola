@@ -2,7 +2,7 @@
 #'
 #' This package provides multiple tools to work with polyploid data.
 #'
-#' Load the dataset \code{simBC} and analyse it with \code{simpalyze}.
+#' Load the dataset \code{simTetra} and analyse it according to the vignette.
 #'
 #' @docType package
 #' @name pergola

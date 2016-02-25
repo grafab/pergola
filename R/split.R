@@ -20,17 +20,17 @@
 #' @export
 splitChr <- function(rf, height = 0.4, nchr = NULL, method = "single", filter = FALSE, 
                      thresh = 0.05, rm.dup = TRUE, ...){
-  df <- data.frame(names = rownames(rf), split = 1, dup = 0)
-  rownames(df) <- df$names
+  split <- data.frame(names = rownames(rf), split = 1, dup = 0)
+  rownames(split) <- split$names
   if(rm.dup == TRUE){
     zeroes <- which(rf == 0, arr.ind = TRUE)
-    offdiag <- which(zeroes[, 1] < zeroes[, 2]) #!= leads to both 
+    offdiag <- which(zeroes[, 1] < zeroes[, 2])
     for(j in offdiag){
-      df$split[zeroes[j, 2]] <- 0
-      df$dup[zeroes[j, 2]] <- zeroes[j, 1]
+      split$split[zeroes[j, 2]] <- 0
+      split$dup[zeroes[j, 2]] <- zeroes[j, 1]
     }
   } 
-  rfsub <- rf[df$split > 0, df$split > 0]
+  rfsub <- rf[split$split > 0, split$split > 0]
   tree <- hclust(as.dist(rfsub), method = method)
   minleaves <- thresh * ncol(rfsub)
   if(!is.null(nchr)){
@@ -40,7 +40,7 @@ splitChr <- function(rf, height = 0.4, nchr = NULL, method = "single", filter = 
       if(length(filtClus) > 0){
         tooFilt <- which(output %in% filtClus)
         if(length(tooFilt) < ncol(rfsub)){
-          df$split[df$split > 0][tooFilt] <- 0
+          split$split[split$split > 0][tooFilt] <- 0
           rfsub <- rfsub[-tooFilt, -tooFilt]
           tree <- hclust(as.dist(rfsub), method = method)
           output <- cutree(tree = tree, k = nchr)
@@ -49,7 +49,6 @@ splitChr <- function(rf, height = 0.4, nchr = NULL, method = "single", filter = 
         }
       }else{
         filter <- FALSE
-        #df$split[df$split > 0] <- output
       }
     }
   }else{
@@ -57,10 +56,8 @@ splitChr <- function(rf, height = 0.4, nchr = NULL, method = "single", filter = 
     if(filter){
       filtClus <- which(table(output) < minleaves)
       output[output %in% filtClust] <- 0
-      #df$split[df$split>0] <- output
-      
     }
   }
-  df$split[df$split>0] <- output
-  return(df)   
+  split$split[split$split > 0] <- output
+  return(split)   
 }

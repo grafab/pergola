@@ -10,7 +10,7 @@
 #' The number of columns is 1/\code{ploidy} of the \code{input}.
 #' @examples
 #' data(simTetra)
-#' bases2genotypes(simTetra,4)
+#' bases2genotypes(simTetra, 4)
 #' @export
 bases2genotypes <- function(input,ploidy){
   nGeno<-ncol(input)
@@ -33,7 +33,7 @@ bases2genotypes <- function(input,ploidy){
 #' The markers are in a random order and the alleles within the samples are in a random order.
 #' @examples
 #' data(simTetra)
-#' shuffleInput(simTetra,4)
+#' shuffleInput(simTetra, 4)
 #' @export
 shuffleInput <- function(input, ploidy = 4, ignore = 0){
   numbMark <- nrow(input)

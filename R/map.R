@@ -4,26 +4,27 @@
 #' Creates map object from matrix of pairwise recombination frequencies.
 #'   
 #' @param rf Matrix of pairwise recombination frequencies.
-#' @param df Split object.
+#' @param split Split object.
 #' @param fun Function to space the markers on the map. 
-#' Default "haldane". Alternatives "kosambi", "carter" and "none.
+#' Default is "haldane". Alternatives are "kosambi", "carter" and "none.
 #' @param corr Corrector, if recombinations are overestimated.
+#' Allows to multiply all spaces by a fixed factor.
 #' @return Ordered vector of marker locations. Each marker has a name attribute.
 #' @examples
 #' data(simTetra)
-#' simTetrageno<-bases2genotypes(simTetra,4)
-#' rfMat<-calcRec(simTetrageno,4)
-#' split<-splitChr(rfMat,nchr=7)
-#' order<-sortLeafs(rfMat,split)
-#' pullMap(rfMat,order[split==1],split=split,names=rownames(simTetra)[split==1])   
+#' simTetrageno <- bases2genotypes(simTetra, 4)
+#' rfMat <- calcRec(simTetrageno, 4)
+#' split <- splitChr(rfMat, nchr = 7)
+#' split <- sortLeafs(rfMat, split)
+#' pullMap(rfMat, split = split)   
 #' @export
-pullMap <- function(rf, df, fun = "haldane", corr = 1){
+pullMap <- function(rf, split, fun = "haldane", corr = 1){
   fun <- match.arg(fun, c("haldane", "kosambi", "carter", "none"))
-  rf <- rf[df$order, df$order]
-  mdf <- max(df$split)
-  globalMap <- vector(mode = "list", length = mdf)
-  for(i in 1:mdf){
-    subset <- which(df$split[df$order] == i)
+  rf <- rf[split$order, split$order]
+  msplit <- max(split$split)
+  globalMap <- vector(mode = "list", length = msplit)
+  for(i in 1:msplit){
+    subset <- which(split$split[split$order] == i)
     lss <- length(subset)
     map <- rep(0, lss)
     for(j in 2:lss){
@@ -34,17 +35,8 @@ pullMap <- function(rf, df, fun = "haldane", corr = 1){
                   kosambi = 0.25 * log((1 + 2 * map) / (1 - 2 * map)) * 100,
                   carter = 0.25 * (0.5 * (log(1 + 2 * map) - log(1 - 2 * map)) + atan(2 * map)) * 100,
                   none = map)
-    #     if(fun == "haldane"){
-    #       map<- -log(1 - 2 * map) * 100
-    #     }else if(fun == "kosambi"){
-    #       map <- 0.25 * log((1 + 2 * map) / (1 - 2 * map)) * 100     # ¼ ln[(1+2r)/(1-2r)]  
-    #     }else if(fun == "carter"){
-    #       map <- 0.25 * (0.5 * (log(1 + 2 * map) - log(1 - 2 * map)) + atan(2 * map)) * 100 #¼ {1/2 [ln(1+2r)-ln(1-2r)] + tan-1 (2r)}  
-    #     }else if(fun == "none"){
-    #       cat("No mapping function applied!\n")
-    #     } 
     map <- cumsum(map) * corr
-    names(map) <- df$names[df$order][df$split[df$order] == i]
+    names(map) <- split$names[split$order][split$split[split$order] == i]
     if(any(is.infinite(map))) map <- map[!is.infinite(map)]
     globalMap[[i]] <- map
   }  
@@ -59,6 +51,17 @@ pullMap <- function(rf, df, fun = "haldane", corr = 1){
 #' @param map Map to switch.
 #' @param comp Other map for comparison.
 #' @return map
+#' @examples 
+#' data(simTetra)
+#' simTetrageno <- bases2genotypes(simTetra, 4)
+#' rfMat <- calcRec(simTetrageno, 4)
+#' split <- splitChr(rfMat, nchr = 7)
+#' split <- sortLeafs(rfMat, split)
+#' map <- pullMap(rfMat, split = split)   
+#' split <- sortLeafs(rfMat, split, method = "endlink")
+#' map2 <- pullMap(rfMat, split = split)   
+#' map <- switchChrs(map, map2)
+#' 
 #' @export
 switchChrs <- function(map, comp){
   lapply(map, function(x) switchChr(x, comp))
@@ -117,6 +120,16 @@ findChr <- function(map, comp){
 #' @param map Map to switch.
 #' @param comp Other map for comparison.
 #' @return map
+#' @examples 
+#' data(simTetra)
+#' simTetrageno <- bases2genotypes(simTetra, 4)
+#' rfMat <- calcRec(simTetrageno, 4)
+#' split <- splitChr(rfMat, nchr = 7)
+#' split <- sortLeafs(rfMat, split)
+#' map <- pullMap(rfMat, split = split)   
+#' split <- sortLeafs(rfMat, split, method = "endlink")
+#' map2 <- pullMap(rfMat, split = split)   
+#' map <- swapChrs(map, map2)
 #' @export
 swapChr <- function(map, comp){
   chrs <- sapply(map, function(x) findChr(names(x), comp))
@@ -141,12 +154,12 @@ swapChr <- function(map, comp){
 #' @return Dendogram object.
 #' @examples
 #' data(simTetra)
-#' simTetrageno<-bases2genotypes(simTetra,4)
-#' rfMat<-calcRec(simTetrageno,4)
-#' split<-splitChr(rfMat,nchr=7)
-#' order<-sortLeafs(rfMat,split)
-#' map<-pullMap(rfMat,order[split==1],names=rownames(simTetra)[split==1]) 
-#' dend<-map2dend(map)  
+#' simTetrageno <- bases2genotypes(simTetra, 4)
+#' rfMat <- calcRec(simTetrageno, 4)
+#' split <- splitChr(rfMat, nchr = 7)
+#' split <- sortLeafs(rfMat, split)
+#' map <- pullMap(rfMat, split = split)   
+#' dend <- map2dend(map)  
 #' plot(dend)
 #' @export
 map2dend<-function(map, mergeoff = 0L){
@@ -173,18 +186,17 @@ map2dend<-function(map, mergeoff = 0L){
 #' Add offset to zero distance markers to allow computation of correlation between maps.
 #'     
 #' @param map One map. Required.
-#' @param offset Numeric. How much offset should be added.
+#' @param offset Numeric value for offset.
 #' 
-#' @return Map.
+#' @return Map object.
 #' @examples
 #' data(simTetra)
-#' simTetrageno<-bases2genotypes(simTetra,4)
-#' rfMat<-calcRec(simTetrageno,4)
-#' split<-splitChr(rfMat,nchr=7)
-#' order<-sortLeafs(rfMat,split)
-#' map<-pullMap(rfMat,order[split==1],names=rownames(simTetra)[split==1]) 
-#' dend<-map2dend(map)  
-#' plot(dend)
+#' simTetrageno <- bases2genotypes(simTetra, 4)
+#' rfMat <- calcRec(simTetrageno, 4)
+#' split <- splitChr(rfMat, nchr = 7)
+#' split <- sortLeafs(rfMat, split)
+#' map <- pullMap(rfMat, split = split)   
+#' map <- add_offset(map)
 #' @export
 add_offset<-function(map, offset = 0.1){
   for(i in 1:length(map)){

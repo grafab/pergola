@@ -1,7 +1,3 @@
-
-
-
-#
 #' Creates all trees for distance
 #' 
 #' Takes order and tree and creates all possible trees
@@ -11,7 +7,7 @@
 #' @return Vector with markers with unclear relation (equal distances).
 #' 
 #' @keywords internal
-allTrees2 <- function(hc, dis, start = 1){
+allTrees <- function(hc, dis, start = 1){
   dis <- as.matrix(dis)
   out <- list(hc$merge)
   for(i in (start + 1):nrow(hc$merge)){
@@ -35,44 +31,10 @@ allTrees2 <- function(hc, dis, start = 1){
   return(out)
 }
 
-
 #
-#' Creates all trees for distance
+#' Get Node for leave
 #' 
-#' Takes order and tree and creates all possible trees
-#'  
-#' @param hc Hierarchical clustering object.
-#' @param dist Distance object.
-#' @return Vector with markers with unclear relation (equal distances).
-#' 
-#' @keywords internal
-allTrees <- function(hc, dis, start = 1){
-  dis <- as.matrix(dis)
-  out <- list(hc$merge)
-  for(i in (start + 1):nrow(hc$merge)){
-    subl <- getLeaves(hc$merge, hc$merge[i, 1])
-    subr <- getLeaves(hc$merge, hc$merge[i, 2])
-    pairs <- as.matrix(expand.grid(subl, subr))
-    heights <- apply(pairs, 1, function(x) dis[x[1], x[2]])
-    sheights <- heights == hc$height[i]
-    if(sum(sheights) > 1){
-      for(j in which(sheights)){
-        hc2 <- switchLeaves(hc, pairs[j, ])
-        if(nrow(hc$merge) > i){
-          out <- c(out, allTrees(hc = hc2, dis = dis, start = i))
-        }else{
-          out <- c(out, list(hc2$merge))
-        }
-      }
-    }
-  }
-  return(out)
-}
-
-#
-#' Switches leaves in hclust object
-#' 
-#' Switches leaves in hclust object
+#' Finds the highest node of a leaf in hclust object below a threshold
 #'  
 #' @param hc Hierarchical clustering object.
 #' @param pair Vector of length 2.
@@ -91,24 +53,6 @@ getNode <- function(merge, leave, max){
   hc2
 }
 
-#
-#' Switches leaves in hclust object
-#' 
-#' Switches leaves in hclust object
-#'  
-#' @param hc Hierarchical clustering object.
-#' @param pair Vector of length 2.
-#' @return Updated hclust object.
-#' 
-#' @keywords internal
-switchLeaves <- function(hc, pair){
-  hc2 <- hc
-  pair <- pair * (-1)
-  hc2$merge[hc$merge == pair[1]] <- pair[2]
-  hc2$merge[hc$merge == pair[2]] <- pair[1]
-  mode(hc2$merge) <- "integer"
-  hc2
-}
 
 #
 #' Switches entries in hclust object

@@ -10,9 +10,9 @@
 #' @return None.
 #' @examples
 #' data(simTetra)
-#' simTetrageno<-bases2genotypes(simTetra,4)
-#' rfMat<-calcRec(simTetrageno,4)
-#' plotRf(calcRec)
+#' simTetraGen <- bases2genotypes(simTetra, 4)
+#' rfMat <- calcRec(simTetraGen, 4)
+#' plotRf(rfMat)
 #' @export
 plotRf <- function(rf, plottype = "dendrogram", method = "single", cex.axis = 1, ...){
   tree<-hclust(as.dist(rf), method = method)
@@ -38,11 +38,11 @@ plotRf <- function(rf, plottype = "dendrogram", method = "single", cex.axis = 1,
 #' @return None. Plotting only.
 #' @examples
 #' data(simTetra)
-#' simTetrageno<-bases2genotypes(simTetra,4)
-#' rfMat<-calcRec(simTetrageno,4)
-#' split<-splitChr(rfMat,nchr=7)
-#' order<-sortLeafs(rfMat,split)
-#' map<-pullMap(rfMat,order[split==1],names=rownames(simTetra)[split==1]) 
+#' simTetraGen <- bases2genotypes(simTetra, 4)
+#' rfMat <- calcRec(simTetraGen, 4)
+#' split <- splitChr(rfMat, nchr = 7)
+#' split <- sortLeafs(rfMat, split)
+#' map <- pullMap(rfMat, split = split) 
 #' plotChr(map)  
 #' @export
 
@@ -94,21 +94,21 @@ plotChr <- function(map1, map2 = NULL, cex = 1, ...){
 #' @return None. Plotting only.
 #' @examples
 #' data(simTetra)
-#' simTetrageno<-bases2genotypes(simTetra,4)
-#' rfMat<-calcRec(simTetrageno,4)
-#' split<-splitChr(rfMat,nchr=7)
-#' order<-sortLeafs(rfMat,split)
-#' map<-pullMap(rfMat,order[split==1],names=rownames(simTetra)[split==1]) 
-#' dend<-map2dend(map)  
-#' maketangle(dend,dend,cutheigt=500,k=7,ncol=7)
+#' simTetraGen <- bases2genotypes(simTetra, 4)
+#' rfMat <- calcRec(simTetraGen, 4)
+#' split <- splitChr(rfMat, nchr = 7)
+#' split <- sortLeafs(rfMat, split)
+#' map <- pullMap(rfMat, split = split)  
+#' dend <- map2dend(map)  
+#' maketangle(dend, dend, cutheigt = 500, k = 7, ncol = 7)
 #' @export
-maketangle<-function(dend1,dend2,cutheight,k=NULL,ncol=k,...){
+maketangle<-function(dend1, dend2, cutheight, k = NULL, ncol = k, ...){
   library(dendextend)
-  library(dendextendRcpp,quietly = TRUE)
-  dendlist<-intersect_trees(dend1,dend2)
-  split<-cutree(dendlist[[1]],h=cutheight)
-  if(is.null(k)) k<- max(split)
-  tanglegram(dendlist,color_lines = gray.colors(ncol)[makealtord(k)][split],...)
+  library(dendextendRcpp, quietly = TRUE)
+  dendlist <- intersect_trees(dend1, dend2)
+  split <- cutree(dendlist[[1]], h = cutheight)
+  if(missing(k)) k <- max(split)
+  tanglegram(dendlist, color_lines = gray.colors(ncol)[makealtord(k)][split], ...)
 }
 
 

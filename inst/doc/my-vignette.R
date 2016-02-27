@@ -92,37 +92,11 @@ library(dendextend)
 library(gclus)
 
 ## ------------------------------------------------------------------------
-egsplit <- sortLeafs(rf, split, method = "endlink-global")
-egmaps <- pullMap(rf, egsplit)
-esplit <- sortLeafs(rf, split, method = "endlink")
-emaps <- pullMap(rf, esplit)
-
-## ---- fig.show = 'hold', fig.width = 10, fig.height = 10-----------------
-image(rf[egsplit$order, egsplit$order], xaxt = 'n', yaxt = 'n')
-axis(side = 1, at = seq(0, 1, length.out = nrow(rf)),
-     labels = rownames(rf)[egsplit$order], las = 2, cex.axis = 0.8)
-axis(side = 2, at = seq(0, 1, length.out = nrow(rf)),
-     labels = rownames(rf)[egsplit$order], las = 2, cex.axis = 0.8) 
-
-image(rf[esplit$order, esplit$order], xaxt = 'n', yaxt = 'n')
-axis(side = 1, at = seq(0, 1, length.out = nrow(rf)),
-     labels = rownames(rf)[esplit$order], las = 2, cex.axis = 0.8)
-axis(side = 2, at = seq(0, 1, length.out = nrow(rf)),
-     labels = rownames(rf)[esplit$order], las = 2, cex.axis = 0.8) 
-
-## ---- fig.show = 'hold', fig.width = 10, fig.height = 15-----------------
-dend <- map2dend(maps)
-egdend <- map2dend(egmaps)
-edend <- map2dend(emaps)
-maketangle(dend, egdend, cutheight = 500, k = 7)
-maketangle(dend, edend, cutheight = 500, k = 7)
-
-## ------------------------------------------------------------------------
 maps3 <- maps2
 maps3[1] <- maps2[2]
 maps3[2] <- maps2[1]
 maps3[3] <- maps2[7]
-maps3[[4]] <- rev(max(maps3[[4]])-maps3[[4]])
+maps3[[4]] <- rev(max(maps3[[4]]) - maps3[[4]])
 maps3[6] <- maps2[3]
 maps3[7] <- maps2[6]
 maps3[[4]]
@@ -136,9 +110,14 @@ plot(dend1, cex = 0.6)
 dend2 <- map2dend(maps3)
 
 ## ---- fig.show = 'hold', fig.width = 10, fig.height = 15-----------------
-dendlist12 <- dendlist(dend1, dend2)
-tanglegram(dendlist12, color_lines = cutree(dend1, k = 7),
-           columns_width = c(1, 3, 1))
+maketangle(dend1, dend2, cutheight = 500, k = 7)
+
+## ---- fig.show = 'hold', fig.width = 10, fig.height = 15-----------------
+maps <- switchChrs(map = maps, comp = maps3)
+maps <- swapChrs(map = maps, comp = maps3)
+dend3 <- map2dend(maps)
+dend4 <- map2dend(maps3)
+maketangle(dend3, dend4, cutheight = 500, k = 7)
 
 ## ------------------------------------------------------------------------
 sessionInfo()

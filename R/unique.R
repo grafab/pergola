@@ -44,13 +44,14 @@ allTrees <- function(hc, dis, start = 1){
 getNode <- function(merge, leave, max){
   for(i in max:1){
     leaves <- getLeaves(merge, i)
-    if(abs(leave) %in% leaves) break()
+    if(abs(leave) %in% leaves) return(i)
   }
-  pair <- pair * (-1)
-  hc2$merge[hc$merge == pair[1]] <- pair[2]
-  hc2$merge[hc$merge == pair[2]] <- pair[1]
-  mode(hc2$merge) <- "integer"
-  hc2
+#   pair <- pair * (-1)
+#   hc2$merge[hc$merge == pair[1]] <- pair[2]
+#   hc2$merge[hc$merge == pair[2]] <- pair[1]
+#   mode(hc2$merge) <- "integer"
+#   hc2
+  stop("Leave is not in tree.")
 }
 
 

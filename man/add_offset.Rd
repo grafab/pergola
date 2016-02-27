@@ -9,22 +9,21 @@ add_offset(map, offset = 0.1)
 \arguments{
 \item{map}{One map. Required.}
 
-\item{offset}{Numeric. How much offset should be added.}
+\item{offset}{Numeric value for offset.}
 }
 \value{
-Map.
+Map object.
 }
 \description{
 Add offset to zero distance markers to allow computation of correlation between maps.
 }
 \examples{
 data(simTetra)
-simTetrageno<-bases2genotypes(simTetra,4)
-rfMat<-calcRec(simTetrageno,4)
-split<-splitChr(rfMat,nchr=7)
-order<-sortLeafs(rfMat,split)
-map<-pullMap(rfMat,order[split==1],names=rownames(simTetra)[split==1]) 
-dend<-map2dend(map)  
-plot(dend)
+simTetrageno <- bases2genotypes(simTetra, 4)
+rfMat <- calcRec(simTetrageno, 4)
+split <- splitChr(rfMat, nchr = 7)
+split <- sortLeafs(rfMat, split)
+map <- pullMap(rfMat, split = split)   
+map <- add_offset(map)
 }
 

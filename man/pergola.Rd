@@ -9,6 +9,6 @@
 This package provides multiple tools to work with polyploid data.
 }
 \details{
-Load the dataset \code{simBC} and analyse it with \code{simpalyze}.
+Load the dataset \code{simTetra} and analyse it according to the vignette.
 }
 

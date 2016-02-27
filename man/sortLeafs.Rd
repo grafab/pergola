@@ -24,9 +24,9 @@ Calculates the optimal leaf ordering pairwise for all linkage groups.
 }
 \examples{
 data(simTetra)
-simTetrageno<-bases2genotypes(simTetra,4)
-rfMat<-calcRec(simTetrageno,4)
-split<-splitChr(rfMat,nchr=7)
-sortLeafs(rfMat,split)
+simTetrageno <- bases2genotypes(simTetra, 4)
+rfMat <- calcRec(simTetrageno, 4)
+split <- splitChr(rfMat, nchr = 7)
+sortLeafs(rfMat, split)
 }
 

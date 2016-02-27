@@ -21,12 +21,12 @@ Allows for comparison of whole map with package 'dendextend'
 }
 \examples{
 data(simTetra)
-simTetrageno<-bases2genotypes(simTetra,4)
-rfMat<-calcRec(simTetrageno,4)
-split<-splitChr(rfMat,nchr=7)
-order<-sortLeafs(rfMat,split)
-map<-pullMap(rfMat,order[split==1],names=rownames(simTetra)[split==1]) 
-dend<-map2dend(map)  
+simTetrageno <- bases2genotypes(simTetra, 4)
+rfMat <- calcRec(simTetrageno, 4)
+split <- splitChr(rfMat, nchr = 7)
+split <- sortLeafs(rfMat, split)
+map <- pullMap(rfMat, split = split)   
+dend <- map2dend(map)  
 plot(dend)
 }
 

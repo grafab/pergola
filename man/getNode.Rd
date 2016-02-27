@@ -2,7 +2,7 @@
 % Please edit documentation in R/unique.R
 \name{getNode}
 \alias{getNode}
-\title{Switches leaves in hclust object}
+\title{Get Node for leave}
 \usage{
 getNode(merge, leave, max)
 }
@@ -15,7 +15,7 @@ getNode(merge, leave, max)
 Updated hclust object.
 }
 \description{
-Switches leaves in hclust object
+Finds the highest node of a leaf in hclust object below a threshold
 }
 \keyword{internal}
 

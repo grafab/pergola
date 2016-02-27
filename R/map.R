@@ -131,7 +131,7 @@ findChr <- function(map, comp){
 #' map2 <- pullMap(rfMat, split = split)   
 #' map <- swapChrs(map, map2)
 #' @export
-swapChr <- function(map, comp){
+swapChrs <- function(map, comp){
   chrs <- sapply(map, function(x) findChr(names(x), comp))
   if(any(duplicated(chrs))){
     warning("Not all chromosomes could be matched with their corresponding chromosome.")

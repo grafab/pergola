@@ -4,17 +4,18 @@
 \alias{pullMap}
 \title{Creates map object}
 \usage{
-pullMap(rf, df, fun = "haldane", corr = 1)
+pullMap(rf, split, fun = "haldane", corr = 1)
 }
 \arguments{
 \item{rf}{Matrix of pairwise recombination frequencies.}
 
-\item{df}{Split object.}
+\item{split}{Split object.}
 
 \item{fun}{Function to space the markers on the map. 
-Default "haldane". Alternatives "kosambi", "carter" and "none.}
+Default is "haldane". Alternatives are "kosambi", "carter" and "none.}
 
-\item{corr}{Corrector, if recombinations are overestimated.}
+\item{corr}{Corrector, if recombinations are overestimated.
+Allows to multiply all spaces by a fixed factor.}
 }
 \value{
 Ordered vector of marker locations. Each marker has a name attribute.
@@ -24,10 +25,10 @@ Creates map object from matrix of pairwise recombination frequencies.
 }
 \examples{
 data(simTetra)
-simTetrageno<-bases2genotypes(simTetra,4)
-rfMat<-calcRec(simTetrageno,4)
-split<-splitChr(rfMat,nchr=7)
-order<-sortLeafs(rfMat,split)
-pullMap(rfMat,order[split==1],split=split,names=rownames(simTetra)[split==1])   
+simTetrageno <- bases2genotypes(simTetra, 4)
+rfMat <- calcRec(simTetrageno, 4)
+split <- splitChr(rfMat, nchr = 7)
+split <- sortLeafs(rfMat, split)
+pullMap(rfMat, split = split)   
 }
 

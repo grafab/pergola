@@ -213,39 +213,6 @@ library(dendextend)
 library(gclus)
 ```
 
-We create two new maps from the same data using another method calles `order.endlink` from the gclus package.
-We use it both on the global data set and on the linkage groups
-```{r}
-egsplit <- sortLeafs(rf, split, method = "endlink-global")
-egmaps <- pullMap(rf, egsplit)
-esplit <- sortLeafs(rf, split, method = "endlink")
-emaps <- pullMap(rf, esplit)
-```
-
-First we have a look at the order again.
-```{r, fig.show = 'hold', fig.width = 10, fig.height = 10}
-image(rf[egsplit$order, egsplit$order], xaxt = 'n', yaxt = 'n')
-axis(side = 1, at = seq(0, 1, length.out = nrow(rf)),
-     labels = rownames(rf)[egsplit$order], las = 2, cex.axis = 0.8)
-axis(side = 2, at = seq(0, 1, length.out = nrow(rf)),
-     labels = rownames(rf)[egsplit$order], las = 2, cex.axis = 0.8) 
-
-image(rf[esplit$order, esplit$order], xaxt = 'n', yaxt = 'n')
-axis(side = 1, at = seq(0, 1, length.out = nrow(rf)),
-     labels = rownames(rf)[esplit$order], las = 2, cex.axis = 0.8)
-axis(side = 2, at = seq(0, 1, length.out = nrow(rf)),
-     labels = rownames(rf)[esplit$order], las = 2, cex.axis = 0.8) 
-```
-
-Now, we create dendrograms from our maps and compare them with each other.
-```{r, fig.show = 'hold', fig.width = 10, fig.height = 15}
-dend <- map2dend(maps)
-egdend <- map2dend(egmaps)
-edend <- map2dend(emaps)
-maketangle(dend, egdend, cutheight = 500, k = 7)
-maketangle(dend, edend, cutheight = 500, k = 7)
-```
-
 We create a new map from the existing map `maps2`, because otherwise the two dendograms would be equal.
 ```{r}
 maps3 <- maps2
@@ -272,12 +239,24 @@ One is plotted, to show what it looks like.
 dend2 <- map2dend(maps3)
 ```
 
-We create a dendogram list and visualize it using `maketangle`.
+`maketangle` creates a tanglegram.
 ```{r, fig.show = 'hold', fig.width = 10, fig.height = 15}
 maketangle(dend1, dend2, cutheight = 500, k = 7)
 ```
 
 We can easily observe the rearrangements that we did before.
+In a real data example we would not want these.
+We use `switchChrs` and `swapChrs` to reverse them.
+One map serves as model while the other one is changed.
+```{r, fig.show = 'hold', fig.width = 10, fig.height = 15}
+maps <- switchChrs(map = maps, comp = maps3)
+maps <- swapChrs(map = maps, comp = maps3)
+dend3 <- map2dend(maps)
+dend4 <- map2dend(maps3)
+maketangle(dend3, dend4, cutheight = 500, k = 7)
+```
+We see, that both maps are now perfectly aligned.
+However, the interchromosomal order is not changed.
 
 #Acknowledgement
 I thank Jeroen Lodewijk for testing the package and providing valuable feedback about its usablity and this vignette.

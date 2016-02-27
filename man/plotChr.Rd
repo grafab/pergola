@@ -22,11 +22,11 @@ Used as comparison between two different maps (e.g. different parameters or link
 }
 \examples{
 data(simTetra)
-simTetrageno<-bases2genotypes(simTetra,4)
-rfMat<-calcRec(simTetrageno,4)
-split<-splitChr(rfMat,nchr=7)
-order<-sortLeafs(rfMat,split)
-map<-pullMap(rfMat,order[split==1],names=rownames(simTetra)[split==1]) 
+simTetraGen <- bases2genotypes(simTetra, 4)
+rfMat <- calcRec(simTetraGen, 4)
+split <- splitChr(rfMat, nchr = 7)
+split <- sortLeafs(rfMat, split)
+map <- pullMap(rfMat, split = split) 
 plotChr(map)  
 }
 

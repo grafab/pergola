@@ -31,6 +31,6 @@ Thus, the performance of our tool can be validated unbiased.
 }
 \examples{
 data(simTetra)
-shuffleInput(simTetra,4)
+shuffleInput(simTetra, 4)
 }
 

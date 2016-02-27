@@ -24,8 +24,8 @@ of the numbers of clusters
 }
 \examples{
 data(simTetra)
-simTetrageno<-bases2genotypes(simTetra,4)
-rfMat<-calcRec(simTetrageno,4)
-plotRf(calcRec)
+simTetraGen <- bases2genotypes(simTetra, 4)
+rfMat <- calcRec(simTetraGen, 4)
+plotRf(rfMat)
 }
 

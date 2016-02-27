@@ -22,6 +22,6 @@ Preprocess the input data in case bases are provided instead of genotypes
 }
 \examples{
 data(simTetra)
-bases2genotypes(simTetra,4)
+bases2genotypes(simTetra, 4)
 }
 

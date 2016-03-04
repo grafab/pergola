@@ -88,10 +88,10 @@ switchChr <- function(map, comp){
   nmark <- length(markers)
   front2 <- markers[1:cnm]
   back2 <- markers[(cnm + 1):nmark]
-  ff <- front %in% front2
-  fb <- front %in% back2
-  bf <- back %in% front2
-  bb <- back %in% back2
+  ff <- sum(front %in% front2)
+  fb <- sum(front %in% back2)
+  bf <- sum(back %in% front2)
+  bb <- sum(back %in% back2)
   if(ff < fb && bb < bf){
     offs <- map[1] + map[length(map)]
     map <- offs - map

@@ -35,6 +35,7 @@ plotRf <- function(rf, plottype = "dendrogram", method = "single", cex.axis = 1,
 #' @param map1 One map. Required.
 #' @param map2 Optional second map for comparison.
 #' @param cex Font size in the figure.
+#' @param labels Labels for the two blocks
 #' @return None. Plotting only.
 #' @examples
 #' data(simTetra)
@@ -46,35 +47,41 @@ plotRf <- function(rf, plottype = "dendrogram", method = "single", cex.axis = 1,
 #' plotChr(map)  
 #' @export
 
-plotChr <- function(map1, map2 = NULL, cex = 1, ...){
+plotChr <- function(map1, map2 = NULL, cex = 1, labels = c("Map 1", "Map 2"), ...){
   nMark1 <- length(map1)
+  x1 = 0.9
+  x2 = 1.1
+  x3 = 1.9
+  x4 = 2.1
+  t1 = 0.5
+  t2 = 2.5
   #plot single chromosome
   if(is.null(map2)){
-    plot(0, type = "n", axes = FALSE, ann = FALSE, xlim = c(0,3), 
-         ylim = c(0, max(map1)), ylab = "cM", xlab = "Map", ...)
-    lines(c(0.9, 0.9), c(min(map1), max(map1)), type = "l")
-    lines(c(1.1, 1.1), c(min(map1), max(map1)), type = "l")
-    segments(x0 = rep(0.9, nMark1), x1 = rep(1.1, nMark1), y0 = map1, y1 = map1)
-    text(x = 0.5, y = map1, labels = names(map1), cex = cex)
+    plot(0, type = "n", axes = FALSE, ann = FALSE, xlim = c(0, 3), 
+         ylim = c(0, max(map1)), ylab = "cM", xlab = labels[1], ...)
+    lines(c(x1, x1), c(min(map1), max(map1)), type = "l")
+    lines(c(x2, x2), c(min(map1), max(map1)), type = "l")
+    segments(x0 = rep(x1, nMark1), x1 = rep(x2, nMark1), y0 = map1, y1 = map1)
+    text(x = t1, y = map1, labels = names(map1), cex = cex)
   }else{ #compare two maps
     plot(0, type = "n", axes = FALSE, xlim = c(0, 3), ylim = c(0, max(c(map1, map2))), 
-         ylab = "cM", xlab = "Map", ...)   
-    lines(c(0.9, 0.9), c(min(map1), max(map1)), type = "l")
-    lines(c(1.1, 1.1), c(min(map1), max(map1)), type = "l")
-    segments(x0 = rep(0.9, nMark1), x1 = rep(1.1, nMark1), y0 = map1, y1 = map1)
-    text(x = 0.5, y = map1, labels = names(map1), cex = cex)
+         ylab = "cM", xlab = labels[1], ...)   
+    lines(c(x1, x1), c(min(map1), max(map1)), type = "l")
+    lines(c(x2, x2), c(min(map1), max(map1)), type = "l")
+    segments(x0 = rep(x1, nMark1), x1 = rep(x2, nMark1), y0 = map1, y1 = map1)
+    text(x = t1, y = map1, labels = names(map1), cex = cex)
     #second map
-    lines(c(1.9, 1.9), c(min(map2), max(map2)), type = "l")
-    lines(c(2.1, 2.1), c(min(map2), max(map2)), type = "l")
+    lines(c(x3, x3), c(min(map2), max(map2)), type = "l")
+    lines(c(x4, x4), c(min(map2), max(map2)), type = "l")
     nMark2 <- length(map2)
-    segments(x0 = rep(1.9, nMark2), x1 = rep(2.1, nMark2), y0 = map2, y1 = map2) 
-    text(x = 2.5, y = map2, labels = names(map2), cex = cex)
+    segments(x0 = rep(x3, nMark2), x1 = rep(x4, nMark2), y0 = map2, y1 = map2) 
+    text(x = t2, y = map2, labels = names(map2), cex = cex)
     map1InMap2 <- names(map1) %in% names(map2)
     nMarkBoth <- sum(map1InMap2)
-    segments(x0 = rep(1.1, nMarkBoth), x1 = rep(1.9, nMarkBoth), y0 = map1[map1InMap2], 
-             y1 = map2[names(map1)[map1InMap2]], col= 2 )
+    segments(x0 = rep(x2, nMarkBoth), x1 = rep(x3, nMarkBoth), y0 = map1[map1InMap2], 
+             y1 = map2[names(map1)[map1InMap2]], col = 1 )
     
-    axis(1, line = NA, at = 1:2, labels = c("Map 1", "Map 2"), lwd = 0)
+    axis(1, line = NA, at = 1:2, labels = labels, lwd = 0)
     axis(2, at = seq(0, max(c(map1, map2)), 10))
   }
 }

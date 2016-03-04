@@ -66,6 +66,7 @@ getNode <- function(merge, leave, max){
 #' 
 #' @keywords internal
 switchEntries <- function(hc, e1, e2){
+  if(e1 == e2) return(hc)
   hc2 <- hc
   if(e1 > e2){
     e3 <- e1

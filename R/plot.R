@@ -7,6 +7,7 @@
 #' @param plottype Default is "dendrogram". Any other value will plot the recombination frequencies.
 #' @param method Default is "single", which is used for the hierarchical clustering.
 #' @param cex.axis Size of axis labels in image plot.
+#' @param ... arguments are forwarded to \code{image}.
 #' @return None.
 #' @examples
 #' data(simTetra)
@@ -32,10 +33,11 @@ plotRf <- function(rf, plottype = "dendrogram", method = "single", cex.axis = 1,
 #' Visualization of one or two linkage maps.
 #' Used as comparison between two different maps (e.g. different parameters or linkage mapping tools).
 #'   
-#' @param map1 One map. Required.
+#' @param map1 Numeric vector with marker positions.
 #' @param map2 Optional second map for comparison.
 #' @param cex Font size in the figure.
 #' @param labels Labels for the two blocks
+#' @param ... arguments are forwarded to \code{plot}.
 #' @return None. Plotting only.
 #' @examples
 #' data(simTetra)
@@ -44,7 +46,7 @@ plotRf <- function(rf, plottype = "dendrogram", method = "single", cex.axis = 1,
 #' split <- splitChr(rfMat, nchr = 7)
 #' split <- sortLeafs(rfMat, split)
 #' map <- pullMap(rfMat, split = split) 
-#' plotChr(map)  
+#' plotChr(map[[1]])  
 #' @export
 
 plotChr <- function(map1, map2 = NULL, cex = 1, labels = c("Map 1", "Map 2"), ...){
@@ -107,15 +109,17 @@ plotChr <- function(map1, map2 = NULL, cex = 1, labels = c("Map 1", "Map 2"), ..
 #' split <- sortLeafs(rfMat, split)
 #' map <- pullMap(rfMat, split = split)  
 #' dend <- map2dend(map)  
-#' maketangle(dend, dend, cutheigt = 500, k = 7, ncol = 7)
+#' maketangle(dend, dend, cutheight = 500, k = 7, ncol = 7)
 #' @export
 maketangle<-function(dend1, dend2, cutheight, k = NULL, ncol = k, ...){
-  library(dendextend)
-  library(dendextendRcpp, quietly = TRUE)
-  dendlist <- intersect_trees(dend1, dend2)
-  split <- cutree(dendlist[[1]], h = cutheight)
+  if (!requireNamespace("dendextend", quietly = TRUE)) {
+    stop("dendextend needed for this function to work. Please install it.",
+         call. = FALSE)
+  }
+  dendlist <- dendextend::intersect_trees(dend1, dend2)
+  split <- dendextend::cutree(dendlist[[1]], h = cutheight)
   if(missing(k)) k <- max(split)
-  tanglegram(dendlist, color_lines = gray.colors(ncol)[makealtord(k)][split], ...)
+  dendextend::tanglegram(dendlist, color_lines = gray.colors(ncol)[makealtord(k)][split], ...)
 }
 
 
@@ -126,9 +130,6 @@ maketangle<-function(dend1, dend2, cutheight, k = NULL, ncol = k, ...){
 #' For instance, 1, 4, 2, 5, 3; all numbers have a distance of at least 2 and where possible 3.     
 #' @param n Length of vector.
 #' @return Vector of length n.
-#' @examples
-#' makealtord(3)
-#' makealtord(20)
 #' @keywords internal
 makealtord <- function(n = 3){  
   out<-rep(0, n)

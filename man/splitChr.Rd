@@ -5,7 +5,7 @@
 \title{Split markers into chromosomes}
 \usage{
 splitChr(rf, height = 0.4, nchr = NULL, method = "single",
-  filter = FALSE, thresh = 0.05, rm.dup = TRUE, ...)
+  filter = FALSE, thresh = 0.05, rm.dup = TRUE)
 }
 \arguments{
 \item{rf}{Matrix of pairwise recombination frequencies.}
@@ -19,6 +19,9 @@ splitChr(rf, height = 0.4, nchr = NULL, method = "single",
 \item{filter}{Logical, if the result should be filtered or not. Default is FALSE. Creates zeros for the markers below the threshold.}
 
 \item{thresh}{Threshold for filtering. Default is 0.05, i.e. linkage groups with less than 5\% of markers, are filtered out.}
+
+\item{rm.dup}{Logical, if the duplicated markers should be filtered out.
+TRUE is highly recommended because the markers have no added value for the linkage map.}
 }
 \value{
 Vector of cluster relationship. Same length and order as the matrix of recombination frequencies.

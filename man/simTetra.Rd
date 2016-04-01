@@ -4,13 +4,7 @@
 \name{simTetra}
 \alias{simTetra}
 \title{Tetraploid F2 population}
-\format{A data frame with 131 rows and 400 variables:
-\describe{
-  \item{F2_001_1}{First allele in first offspring}
-  \item{F2_001_2}{Second allele in first offspring}
-  ...
-  \item{F2_100_4}{Fourth allele in last offspring}
-}}
+\format{A data frame with 131 rows and 400 variables:}
 \source{
 \url{https://github.com/PBR/pedigreeSim}
 }

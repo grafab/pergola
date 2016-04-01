@@ -13,6 +13,8 @@ Columns represent samples.}
 \item{ploidy}{Ploidy level of the organism.}
 
 \item{sparse}{Logical, if the matrix is a sparse matrix or not.}
+
+\item{...}{arguments are forwarded to \code{pairwRF}.}
 }
 \value{
 Matrix of pairwise recombination frequencies.
@@ -22,7 +24,7 @@ Calculate recombination frequencies for a whole matrix
 }
 \examples{
 data(simTetra)
-simTetraGen <- bases2genotypes(simTetraGen, ploidy = 4)
+simTetraGen <- bases2genotypes(simTetra, ploidy = 4)
 calcRec(simTetraGen, 4)
 }
 

@@ -4,13 +4,7 @@
 \name{simHexa}
 \alias{simHexa}
 \title{Hexaploid F2 population}
-\format{A data frame with 131 rows and 600 variables:
-\describe{
-  \item{F2_001_1}{First allele in first offspring}
-  \item{F2_001_2}{Second allele in first offspring}
-  ...
-  \item{F2_100_6}{Sixth allele in last offspring}
-}}
+\format{A data frame with 131 rows and 600 variables:}
 \source{
 \url{https://github.com/PBR/pedigreeSim}
 }

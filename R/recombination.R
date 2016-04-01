@@ -7,16 +7,17 @@
 #' Columns represent samples.
 #' @param ploidy Ploidy level of the organism.
 #' @param sparse Logical, if the matrix is a sparse matrix or not.
+#' @param ... arguments are forwarded to \code{pairwRF}.
 #' @return Matrix of pairwise recombination frequencies.
 #' @examples
 #' data(simTetra)
-#' simTetraGen <- bases2genotypes(simTetraGen, ploidy = 4)
+#' simTetraGen <- bases2genotypes(simTetra, ploidy = 4)
 #' calcRec(simTetraGen, 4)
 #' @export
 calcRec <- function(input, ploidy, sparse = FALSE, ...){
   nMark<-nrow(input)
   com <- combn(1:nMark, 2)
-  vec <- apply(com, MARGIN = 2, FUN=function(x) pairwRF(input[x, ], ploidy, ...))  
+  vec <- apply(com, MARGIN = 2, FUN = function(x) pairwRF(input[x, ], ploidy, ...))  
   if(sparse){
     if (!requireNamespace("Matrix", quietly = TRUE)) {
       stop("Matrix needed for this function to work. Please install it.",

@@ -11,6 +11,8 @@
 #' @param method Default is "single", which is used for the hierarchical clustering.
 #' @param filter Logical, if the result should be filtered or not. Default is FALSE. Creates zeros for the markers below the threshold.
 #' @param thresh Threshold for filtering. Default is 0.05, i.e. linkage groups with less than 5\% of markers, are filtered out.
+#' @param rm.dup Logical, if the duplicated markers should be filtered out.
+#' TRUE is highly recommended because the markers have no added value for the linkage map.
 #' @return Vector of cluster relationship. Same length and order as the matrix of recombination frequencies.
 #' @examples
 #' data(simTetra)
@@ -19,7 +21,7 @@
 #' splitChr(rfMat, nchr = 7)
 #' @export
 splitChr <- function(rf, height = 0.4, nchr = NULL, method = "single", filter = FALSE, 
-                     thresh = 0.05, rm.dup = TRUE, ...){
+                     thresh = 0.05, rm.dup = TRUE){
   split <- data.frame(names = rownames(rf), split = 1, dup = 0)
   rownames(split) <- split$names
   if(rm.dup == TRUE){
@@ -54,7 +56,7 @@ splitChr <- function(rf, height = 0.4, nchr = NULL, method = "single", filter = 
   }else{
     output <- cutree(tree = tree, h = height)  
     if(filter){
-      filtClus <- which(table(output) < minleaves)
+      filtClust <- which(table(output) < minleaves)
       output[output %in% filtClust] <- 0
     }
   }

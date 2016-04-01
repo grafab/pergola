@@ -12,8 +12,7 @@ Description: This package provides tools for linkage mapping in polyploids.
     calculate the order of markers in a linkage group.
 License: GPL-3
 Imports: 
-    seriation,
-    gtools
+    seriation
 LazyData: true
 Suggests: 
     knitr,

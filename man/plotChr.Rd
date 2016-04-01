@@ -4,14 +4,18 @@
 \alias{plotChr}
 \title{Plotting one or two linkage maps}
 \usage{
-plotChr(map1, map2 = NULL, cex = 1, ...)
+plotChr(map1, map2 = NULL, cex = 1, labels = c("Map 1", "Map 2"), ...)
 }
 \arguments{
-\item{map1}{One map. Required.}
+\item{map1}{Numeric vector with marker positions.}
 
 \item{map2}{Optional second map for comparison.}
 
 \item{cex}{Font size in the figure.}
+
+\item{labels}{Labels for the two blocks}
+
+\item{...}{arguments are forwarded to \code{plot}.}
 }
 \value{
 None. Plotting only.
@@ -27,6 +31,6 @@ rfMat <- calcRec(simTetraGen, 4)
 split <- splitChr(rfMat, nchr = 7)
 split <- sortLeafs(rfMat, split)
 map <- pullMap(rfMat, split = split) 
-plotChr(map)  
+plotChr(map[[1]])  
 }
 

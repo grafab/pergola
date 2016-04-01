@@ -17,9 +17,5 @@ Creates a vector of numbers 1 to n, where the neighbors are as distant as possib
 For the grey scale plot, that guarantees, that the shades of grey are easy to distinguish.
 For instance, 1, 4, 2, 5, 3; all numbers have a distance of at least 2 and where possible 3.
 }
-\examples{
-makealtord(3)
-makealtord(20)
-}
 \keyword{internal}
 

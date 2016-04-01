@@ -27,9 +27,9 @@ simTetrageno <- bases2genotypes(simTetra, 4)
 rfMat <- calcRec(simTetrageno, 4)
 split <- splitChr(rfMat, nchr = 7)
 split <- sortLeafs(rfMat, split)
-calcSarf(rfMat, split, n = 1)
-calcSarf(rfMat, split, n = 2)
-calcSarf(rfMat, split, n = 3)
+calcSarf(rfMat, split$order, n = 1)
+calcSarf(rfMat, split$order, n = 2)
+calcSarf(rfMat, split$order, n = 3)
 }
 \references{
 Liu, B.H. 1998, \emph{Statistical genomics: linkage, mapping, and QTL analysis.}

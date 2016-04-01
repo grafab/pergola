@@ -163,7 +163,10 @@ swapChrs <- function(map, comp){
 #' plot(dend)
 #' @export
 map2dend<-function(map, mergeoff = 0L){
-  library(dendextend)
+  if (!requireNamespace("dendextend", quietly = TRUE)) {
+    stop("dendextend needed for this function to work. Please install it.",
+         call. = FALSE)
+  }
   nChr <- length(map)
   mergeval <- (1:nChr) * mergeoff + max(unlist(map)) * 1.2
   nMar<-sapply(map, length)
@@ -171,7 +174,7 @@ map2dend<-function(map, mergeoff = 0L){
   for(i in 1:nChr){
     hclu <- hclust(dist(map[[i]]), method = "complete")
     dend <- as.dendrogram(hclu)
-    dend <- rotate(dend, names(map[[i]]))
+    dend <- dendextend::rotate(dend, names(map[[i]]))
     if(is.null(out)){
       out <- dend
     }else{

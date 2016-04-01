@@ -14,6 +14,8 @@ plotRf(rf, plottype = "dendrogram", method = "single", cex.axis = 1, ...)
 \item{method}{Default is "single", which is used for the hierarchical clustering.}
 
 \item{cex.axis}{Size of axis labels in image plot.}
+
+\item{...}{arguments are forwarded to \code{image}.}
 }
 \value{
 None.

@@ -34,15 +34,29 @@ sortLeafs <- function(rf, df, method = "seriation", maxSarf = NULL){
           stop("seriation needed for this function to work. Please install it.",
                call. = FALSE)
         }
-        if (!requireNamespace("gtools", quietly = TRUE)) {
-          stop("gtools needed for this function to work. Please install it.",
-               call. = FALSE)
-        }
+#         if (!requireNamespace("gtools", quietly = TRUE)) {
+#           stop("gtools needed for this function to work. Please install it.",
+#                call. = FALSE)
+#         }
         dist <- as.dist(rf[sub, sub])
         hc <- hclust(dist, method = "single")
         # multiple clusters are possible for the same distance, if distances are unique
         hclist <- allTrees(hc, dist, start = 1)
-        orders <- lapply(hclist, function(x) .Call("order_optimal", dist, x, PACKAGE = "seriation")[[2]])
+        mode(dist) <- "numeric"
+        #seriation::seriate(tmp2, method= "OLO", control = list(hclust=tmp))[[1]]$order
+        
+        orders <- lapply(hclist, 
+                         function(x){
+                           hc_obj <-list(merge = x,
+                                         method = "single",
+                                         order = 1:attr(dist,"Size"))
+                           class(hc_obj) <- "hclust"
+                           seriation::seriate(dist, method = "OLO", 
+                                              control = list(hclust = hc_obj))[[1]]$order
+                         } 
+                         )
+        #orders <- lapply(hclist, function(x) seriation:::.seriate_optimal(list(merge = x), dist)$order)
+        #orders <- lapply(hclist, function(x) .Call("order_optimal", dist, x, PACKAGE = "seriation")[[2]])
         if(is.null(maxSarf)){
           maxSarf <- length(sub) - 1
         }
@@ -79,19 +93,20 @@ sortLeafs <- function(rf, df, method = "seriation", maxSarf = NULL){
 #' rfMat <- calcRec(simTetrageno, 4)
 #' split <- splitChr(rfMat, nchr = 7)
 #' split <- sortLeafs(rfMat, split)
-#' calcSarf(rfMat, split, n = 1)
-#' calcSarf(rfMat, split, n = 2)
-#' calcSarf(rfMat, split, n = 3)
+#' calcSarf(rfMat, split$order, n = 1)
+#' calcSarf(rfMat, split$order, n = 2)
+#' calcSarf(rfMat, split$order, n = 3)
 #' @references Liu, B.H. 1998, \emph{Statistical genomics: linkage, mapping, and QTL analysis.}
 #' @export
 
 calcSarf <- function(rf, ord = 1:(ncol(rf)), n = 1){
+  ord <- ord[ord > 0]
   l <- length(ord)
   if(n >= l){
     n <- l - 1
     warning(paste("n was set to ", n))
   }
-  rf<-rf[ord, ord]
+  rf <- rf[ord, ord]
   sarf <- 0
   for(j in 1:n){
     for(i in (1 + j):l){    

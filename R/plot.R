@@ -9,6 +9,7 @@
 #' @param cex.axis Size of axis labels in image plot.
 #' @param ... arguments are forwarded to \code{image}.
 #' @return None.
+#' @import graphics
 #' @examples
 #' data(simTetra)
 #' simTetraGen <- bases2genotypes(simTetra, 4)
@@ -39,6 +40,7 @@ plotRf <- function(rf, plottype = "dendrogram", method = "single", cex.axis = 1,
 #' @param labels Labels for the two blocks
 #' @param ... arguments are forwarded to \code{plot}.
 #' @return None. Plotting only.
+#' @import graphics
 #' @examples
 #' data(simTetra)
 #' simTetraGen <- bases2genotypes(simTetra, 4)
@@ -119,7 +121,7 @@ maketangle<-function(dend1, dend2, cutheight, k = NULL, ncol = k, ...){
   dendlist <- dendextend::intersect_trees(dend1, dend2)
   split <- dendextend::cutree(dendlist[[1]], h = cutheight)
   if(missing(k)) k <- max(split)
-  dendextend::tanglegram(dendlist, color_lines = gray.colors(ncol)[makealtord(k)][split], ...)
+  dendextend::tanglegram(dendlist, color_lines = grDevices::gray.colors(ncol)[makealtord(k)][split], ...)
 }
 
 

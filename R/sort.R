@@ -9,6 +9,7 @@
 #' Alternatives endlink (order.endlink from gclus) and endlink-global (ignores linkage groups).
 #' @param maxSarf Maximum number of neighbor to include into SARF extension.
 #' @return Vector of global marker order.
+#' @import stats
 #' @examples
 #' data(simTetra)
 #' simTetrageno <- bases2genotypes(simTetra, 4)

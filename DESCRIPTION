@@ -1,18 +1,20 @@
 Package: pergola
 Type: Package
-Title: Toolbox for polyploid genetic data
+Title: Toolbox for Polyploid Genetic Data
 Version: 1.0
-Date: 2014-12-12
+Date: 2016-03-31
 Authors@R: c(person("Fabian", "Grandke", email = "grafabian@gmail.com",
   role = c("aut", "cre")),
   person("Dirk", "Metzler", email = "metzler@bio.lmu.de",
   role = "ths"))
-Description: This package provides tools for linkage mapping in polyploids.
+Description: Provides tools for linkage mapping in polyploids.
     It implements the method PERGOLA, which is a fast, deterministic method to
     calculate the order of markers in a linkage group.
 License: GPL-3
 Imports: 
-    seriation
+    seriation,    
+    utils,
+    stats
 LazyData: true
 Suggests: 
     knitr,
@@ -20,7 +22,8 @@ Suggests:
     dendextend,
     dendextendRcpp,
     Matrix,
-    rmarkdown
+    rmarkdown,
+    grDevices
 VignetteBuilder: knitr
 RoxygenNote: 5.0.1
 URL: http://github.com/grafab/pergola

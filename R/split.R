@@ -33,7 +33,7 @@ splitChr <- function(rf, height = 0.4, nchr = NULL, method = "single", filter = 
     }
   } 
   rfsub <- rf[split$split > 0, split$split > 0]
-  tree <- hclust(as.dist(rfsub), method = method)
+  tree <- stats::hclust(as.dist(rfsub), method = method)
   minleaves <- thresh * ncol(rfsub)
   if(!is.null(nchr)){
     output <- cutree(tree = tree, k = nchr)
@@ -44,8 +44,8 @@ splitChr <- function(rf, height = 0.4, nchr = NULL, method = "single", filter = 
         if(length(tooFilt) < ncol(rfsub)){
           split$split[split$split > 0][tooFilt] <- 0
           rfsub <- rfsub[-tooFilt, -tooFilt]
-          tree <- hclust(as.dist(rfsub), method = method)
-          output <- cutree(tree = tree, k = nchr)
+          tree <- stats::hclust(as.dist(rfsub), method = method)
+          output <- stats::cutree(tree = tree, k = nchr)
         }else{
           stop("Could not split data into ", nchr, " clusters." )
         }
@@ -54,7 +54,7 @@ splitChr <- function(rf, height = 0.4, nchr = NULL, method = "single", filter = 
       }
     }
   }else{
-    output <- cutree(tree = tree, h = height)  
+    output <- stats::cutree(tree = tree, h = height)  
     if(filter){
       filtClust <- which(table(output) < minleaves)
       output[output %in% filtClust] <- 0

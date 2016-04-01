@@ -181,7 +181,7 @@ sarfExt<-function(uniOrd,  dis, maxSarf = length(uniOrd[1, ])-1){
   if(is.vector(uniOrd)){    
     return(uniOrd)
   }else if(nrow(uniOrd) == 2 && all(uniOrd[1, ] == rev(uniOrd[2, ]))){
-    if(uniOrd[1, 1] < tail(uniOrd[1, ], n = 1)){
+    if(uniOrd[1, 1] < utils::tail(uniOrd[1, ], n = 1)){
       return(uniOrd[1, ])
     }else{
       return(uniOrd[2, ])

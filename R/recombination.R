@@ -15,8 +15,8 @@
 #' calcRec(simTetraGen, 4)
 #' @export
 calcRec <- function(input, ploidy, sparse = FALSE, ...){
-  nMark<-nrow(input)
-  com <- combn(1:nMark, 2)
+  nMark <- nrow(input)
+  com <- utils::combn(1:nMark, 2)
   vec <- apply(com, MARGIN = 2, FUN = function(x) pairwRF(input[x, ], ploidy, ...))  
   if(sparse){
     if (!requireNamespace("Matrix", quietly = TRUE)) {

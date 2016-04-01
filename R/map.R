@@ -152,6 +152,7 @@ swapChrs <- function(map, comp){
 #' @param mergeoff Numeric, offset between chromosomes, to avoid equal heights in dendrogram.
 #' Equal heights lead to problems in cor_bakers_gamma().
 #' @return Dendogram object.
+#' @import stats
 #' @examples
 #' data(simTetra)
 #' simTetrageno <- bases2genotypes(simTetra, 4)

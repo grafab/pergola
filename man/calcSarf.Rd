@@ -23,7 +23,7 @@ The SARF criterion can be extended to a neighborhood > 1.
 }
 \examples{
 data(simTetra)
-simTetrageno <- bases2genotypes(simTetra, 4)
+simTetrageno <- basesToGenotypes(simTetra, 4)
 rfMat <- calcRec(simTetrageno, 4)
 split <- splitChr(rfMat, nchr = 7)
 split <- sortLeafs(rfMat, split)

@@ -24,7 +24,7 @@ Calculate recombination frequencies for a whole matrix
 }
 \examples{
 data(simTetra)
-simTetraGen <- bases2genotypes(simTetra, ploidy = 4)
+simTetraGen <- basesToGenotypes(simTetra, ploidy = 4)
 calcRec(simTetraGen, 4)
 }
 

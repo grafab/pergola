@@ -19,7 +19,7 @@ Wrapper function to switch chromosomes for the whole map
 }
 \examples{
 data(simTetra)
-simTetrageno <- bases2genotypes(simTetra, 4)
+simTetrageno <- basesToGenotypes(simTetra, 4)
 rfMat <- calcRec(simTetrageno, 4)
 split <- splitChr(rfMat, nchr = 7)
 split <- sortLeafs(rfMat, split)

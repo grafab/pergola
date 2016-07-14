@@ -11,7 +11,7 @@
 #' @return Matrix of pairwise recombination frequencies.
 #' @examples
 #' data(simTetra)
-#' simTetraGen <- bases2genotypes(simTetra, ploidy = 4)
+#' simTetraGen <- basesToGenotypes(simTetra, ploidy = 4)
 #' calcRec(simTetraGen, 4)
 #' @export
 calcRec <- function(input, ploidy, sparse = FALSE, ...){

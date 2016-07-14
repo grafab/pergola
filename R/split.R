@@ -16,8 +16,8 @@
 #' @return Vector of cluster relationship. Same length and order as the matrix of recombination frequencies.
 #' @examples
 #' data(simTetra)
-#' simTetrageno<-bases2genotypes(simTetra, 4)
-#' rfMat<-calcRec(simTetrageno, 4)
+#' simTetrageno <- basesToGenotypes(simTetra, 4)
+#' rfMat <- calcRec(simTetrageno, 4)
 #' splitChr(rfMat, nchr = 7)
 #' @export
 splitChr <- function(rf, height = 0.4, nchr = NULL, method = "single", filter = FALSE, 

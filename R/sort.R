@@ -12,7 +12,7 @@
 #' @import stats
 #' @examples
 #' data(simTetra)
-#' simTetrageno <- bases2genotypes(simTetra, 4)
+#' simTetrageno <- basesToGenotypes(simTetra, 4)
 #' rfMat <- calcRec(simTetrageno, 4)
 #' split <- splitChr(rfMat, nchr = 7)
 #' sortLeafs(rfMat, split)
@@ -90,7 +90,7 @@ sortLeafs <- function(rf, df, method = "seriation", maxSarf = NULL){
 #' @return Single numeric value, which is the result of the SARF calculation.
 #' @examples
 #' data(simTetra)
-#' simTetrageno <- bases2genotypes(simTetra, 4)
+#' simTetrageno <- basesToGenotypes(simTetra, 4)
 #' rfMat <- calcRec(simTetrageno, 4)
 #' split <- splitChr(rfMat, nchr = 7)
 #' split <- sortLeafs(rfMat, split)

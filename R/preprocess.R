@@ -10,9 +10,9 @@
 #' The number of columns is 1/\code{ploidy} of the \code{input}.
 #' @examples
 #' data(simTetra)
-#' bases2genotypes(simTetra, 4)
+#' basesToGenotypes(simTetra, 4)
 #' @export
-bases2genotypes <- function(input,ploidy){
+basesToGenotypes <- function(input,ploidy){
   nGeno<-ncol(input)
   output<-apply(input, 1, function(y) sapply(seq(1, nGeno, by = ploidy), 
                                              function(x) sum(y[x:(x + ploidy - 1)] == y[1])))

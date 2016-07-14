@@ -12,7 +12,7 @@
 #' @import graphics
 #' @examples
 #' data(simTetra)
-#' simTetraGen <- bases2genotypes(simTetra, 4)
+#' simTetraGen <- basesToGenotypes(simTetra, 4)
 #' rfMat <- calcRec(simTetraGen, 4)
 #' plotRf(rfMat)
 #' @export
@@ -105,7 +105,7 @@ plotChr <- function(map1, map2 = NULL, cex = 1, labels = c("Map 1", "Map 2"), ..
 #' @return None. Plotting only.
 #' @examples
 #' data(simTetra)
-#' simTetraGen <- bases2genotypes(simTetra, 4)
+#' simTetraGen <- basesToGenotypes(simTetra, 4)
 #' rfMat <- calcRec(simTetraGen, 4)
 #' split <- splitChr(rfMat, nchr = 7)
 #' split <- sortLeafs(rfMat, split)

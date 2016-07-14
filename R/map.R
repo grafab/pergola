@@ -12,7 +12,7 @@
 #' @return Ordered vector of marker locations. Each marker has a name attribute.
 #' @examples
 #' data(simTetra)
-#' simTetrageno <- bases2genotypes(simTetra, 4)
+#' simTetrageno <- basesToGenotypes(simTetra, 4)
 #' rfMat <- calcRec(simTetrageno, 4)
 #' split <- splitChr(rfMat, nchr = 7)
 #' split <- sortLeafs(rfMat, split)
@@ -53,7 +53,7 @@ pullMap <- function(rf, split, fun = "haldane", corr = 1){
 #' @return map
 #' @examples 
 #' data(simTetra)
-#' simTetrageno <- bases2genotypes(simTetra, 4)
+#' simTetrageno <- basesToGenotypes(simTetra, 4)
 #' rfMat <- calcRec(simTetrageno, 4)
 #' split <- splitChr(rfMat, nchr = 7)
 #' split <- sortLeafs(rfMat, split)
@@ -122,7 +122,7 @@ findChr <- function(map, comp){
 #' @return map
 #' @examples 
 #' data(simTetra)
-#' simTetrageno <- bases2genotypes(simTetra, 4)
+#' simTetrageno <- basesToGenotypes(simTetra, 4)
 #' rfMat <- calcRec(simTetrageno, 4)
 #' split <- splitChr(rfMat, nchr = 7)
 #' split <- sortLeafs(rfMat, split)
@@ -155,7 +155,7 @@ swapChrs <- function(map, comp){
 #' @import stats
 #' @examples
 #' data(simTetra)
-#' simTetrageno <- bases2genotypes(simTetra, 4)
+#' simTetrageno <- basesToGenotypes(simTetra, 4)
 #' rfMat <- calcRec(simTetrageno, 4)
 #' split <- splitChr(rfMat, nchr = 7)
 #' split <- sortLeafs(rfMat, split)
@@ -195,7 +195,7 @@ map2dend<-function(map, mergeoff = 0L){
 #' @return Map object.
 #' @examples
 #' data(simTetra)
-#' simTetrageno <- bases2genotypes(simTetra, 4)
+#' simTetrageno <- basesToGenotypes(simTetra, 4)
 #' rfMat <- calcRec(simTetrageno, 4)
 #' split <- splitChr(rfMat, nchr = 7)
 #' split <- sortLeafs(rfMat, split)

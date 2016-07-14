@@ -60,7 +60,7 @@ In the next step we collapse four columns into one.
 That way we have one column per sample, without loosing information.
 
 ```{r}
-simTetraGen <- bases2genotypes(simTetraGen, ploidy = 4)
+simTetraGen <- basesToGenotypes(simTetraGen, ploidy = 4)
 simTetraGen[1:5, 1:6]
 ```
 

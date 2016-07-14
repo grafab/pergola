@@ -1,0 +1,16 @@
+context("Map to Dendogram")
+
+test_that("mapToDend returns correct dendrogram", {
+  data("simTetra")
+  simTetra <- basesToGenotypes(simTetra, ploidy = 4)
+  rf <- calcRec(simTetra, ploidy = 4)
+  split <- splitChr(rf, nchr = 7)
+  sorted <- sortLeafs(rf, split)
+  map <- pullMap(rf, sorted)
+  dend <- mapToDend(map)
+  expect_is(dend, "dendrogram")
+  expect_equal(attr(dend, "members"), 131)
+  expect_equal(attr(dend, "height"), 557.5148843)
+  expect_equal(length(dend), 2)
+  expect_true(attr(dend[[2]][[2]][[2]][[2]][[2]], "leaf"))
+})

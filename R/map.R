@@ -160,10 +160,10 @@ swapChrs <- function(map, comp){
 #' split <- splitChr(rfMat, nchr = 7)
 #' split <- sortLeafs(rfMat, split)
 #' map <- pullMap(rfMat, split = split)   
-#' dend <- map2dend(map)  
+#' dend <- mapToDend(map)  
 #' plot(dend)
 #' @export
-map2dend<-function(map, mergeoff = 0L){
+mapToDend<-function(map, mergeoff = 0L){
   if (!requireNamespace("dendextend", quietly = TRUE)) {
     stop("dendextend needed for this function to work. Please install it.",
          call. = FALSE)

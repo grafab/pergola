@@ -229,14 +229,14 @@ maps2[[4]]
 We create dendogram objects from our previously created maps.
 
 ```{r, fig.show = 'hold', fig.width = 15, fig.height = 5}
-dend1 <- map2dend(maps)
+dend1 <- mapToDend(maps)
 plot(dend1, cex = 0.6)
 ```
 
 One is plotted, to show what it looks like.
 
 ```{r}
-dend2 <- map2dend(maps3)
+dend2 <- mapToDend(maps3)
 ```
 
 `maketangle` creates a tanglegram.

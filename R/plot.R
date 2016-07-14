@@ -110,7 +110,7 @@ plotChr <- function(map1, map2 = NULL, cex = 1, labels = c("Map 1", "Map 2"), ..
 #' split <- splitChr(rfMat, nchr = 7)
 #' split <- sortLeafs(rfMat, split)
 #' map <- pullMap(rfMat, split = split)  
-#' dend <- map2dend(map)  
+#' dend <- mapToDend(map)  
 #' maketangle(dend, dend, cutheight = 500, k = 7, ncol = 7)
 #' @export
 maketangle<-function(dend1, dend2, cutheight, k = NULL, ncol = k, ...){

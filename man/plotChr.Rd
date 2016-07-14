@@ -26,7 +26,7 @@ Used as comparison between two different maps (e.g. different parameters or link
 }
 \examples{
 data(simTetra)
-simTetraGen <- bases2genotypes(simTetra, 4)
+simTetraGen <- basesToGenotypes(simTetra, 4)
 rfMat <- calcRec(simTetraGen, 4)
 split <- splitChr(rfMat, nchr = 7)
 split <- sortLeafs(rfMat, split)

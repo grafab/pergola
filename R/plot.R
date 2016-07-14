@@ -73,12 +73,12 @@ plotChr <-
            labels = c("Map 1", "Map 2"),
            ...) {
     nMark1 <- length(map1)
-    x1 = 0.9
-    x2 = 1.1
-    x3 = 1.9
-    x4 = 2.1
-    t1 = 0.5
-    t2 = 2.5
+    x1 <- 0.9
+    x2 <- 1.1
+    x3 <- 1.9
+    x4 <- 2.1
+    t1 <- 0.5
+    t2 <- 2.5
     #plot single chromosome
     if (is.null(map2)) {
       plot(

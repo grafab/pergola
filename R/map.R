@@ -200,9 +200,9 @@ mapToDend<-function(map, mergeoff = 0L){
 #' split <- splitChr(rfMat, nchr = 7)
 #' split <- sortLeafs(rfMat, split)
 #' map <- pullMap(rfMat, split = split)   
-#' map <- add_offset(map)
+#' map <- addOffset(map)
 #' @export
-add_offset<-function(map, offset = 0.1){
+addOffset<-function(map, offset = 0.1){
   for(i in 1:length(map)){
     while(any(duplicated(map[[i]]))){
       map[[i]][duplicated(map[[i]])]<-map[[i]][duplicated(map[[i]])] + offset

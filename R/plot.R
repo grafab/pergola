@@ -111,9 +111,9 @@ plotChr <- function(map1, map2 = NULL, cex = 1, labels = c("Map 1", "Map 2"), ..
 #' split <- sortLeafs(rfMat, split)
 #' map <- pullMap(rfMat, split = split)  
 #' dend <- mapToDend(map)  
-#' maketangle(dend, dend, cutheight = 500, k = 7, ncol = 7)
+#' makeTangle(dend, dend, cutheight = 500, k = 7, ncol = 7)
 #' @export
-maketangle<-function(dend1, dend2, cutheight, k = NULL, ncol = k, ...){
+makeTangle <- function(dend1, dend2, cutheight, k = NULL, ncol = k, ...){
   if (!requireNamespace("dendextend", quietly = TRUE)) {
     stop("dendextend needed for this function to work. Please install it.",
          call. = FALSE)

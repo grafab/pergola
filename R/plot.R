@@ -121,7 +121,7 @@ maketangle<-function(dend1, dend2, cutheight, k = NULL, ncol = k, ...){
   dendlist <- dendextend::intersect_trees(dend1, dend2)
   split <- dendextend::cutree(dendlist[[1]], h = cutheight)
   if(missing(k)) k <- max(split)
-  dendextend::tanglegram(dendlist, color_lines = grDevices::gray.colors(ncol)[makealtord(k)][split], ...)
+  dendextend::tanglegram(dendlist, color_lines = grDevices::gray.colors(ncol)[makeAltOrd(k)][split], ...)
 }
 
 
@@ -133,7 +133,7 @@ maketangle<-function(dend1, dend2, cutheight, k = NULL, ncol = k, ...){
 #' @param n Length of vector.
 #' @return Vector of length n.
 #' @keywords internal
-makealtord <- function(n = 3){  
+makeAltOrd <- function(n = 3){  
   out<-rep(0, n)
   out[seq(1, n, 2)] <- 1:ceiling(n / 2)
   out[seq(2, n, 2)] <- (ceiling(n / 2) + 1):n

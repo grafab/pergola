@@ -15,7 +15,7 @@ simTetraGen <- shuffleInput(simTetra, ploidy = 4)
 simTetraGen[1:5, 1:12]
 
 ## ------------------------------------------------------------------------
-simTetraGen <- bases2genotypes(simTetraGen, ploidy = 4)
+simTetraGen <- basesToGenotypes(simTetraGen, ploidy = 4)
 simTetraGen[1:5, 1:6]
 
 ## ------------------------------------------------------------------------
@@ -103,21 +103,21 @@ maps3[[4]]
 maps2[[4]]
 
 ## ---- fig.show = 'hold', fig.width = 15, fig.height = 5------------------
-dend1 <- map2dend(maps)
+dend1 <- mapToDend(maps)
 plot(dend1, cex = 0.6)
 
 ## ------------------------------------------------------------------------
-dend2 <- map2dend(maps3)
+dend2 <- mapToDend(maps3)
 
 ## ---- fig.show = 'hold', fig.width = 10, fig.height = 15-----------------
-maketangle(dend1, dend2, cutheight = 500, k = 7)
+makeTangle(dend1, dend2, cutheight = 500, k = 7)
 
 ## ---- fig.show = 'hold', fig.width = 10, fig.height = 15-----------------
 maps <- switchChrs(map = maps, comp = maps3)
 maps <- swapChrs(map = maps, comp = maps3)
-dend3 <- map2dend(maps)
-dend4 <- map2dend(maps3)
-maketangle(dend3, dend4, cutheight = 500, k = 7)
+dend3 <- mapToDend(maps)
+dend4 <- mapToDend(maps3)
+makeTangle(dend3, dend4, cutheight = 500, k = 7)
 
 ## ------------------------------------------------------------------------
 sessionInfo()

@@ -11,7 +11,7 @@ sortLeafs(rf, df, method = "seriation", maxSarf = NULL)
 
 \item{df}{Vector of cluster numbers, created by splitChr(). Zeros indicated filtered markers and will be ignored.}
 
-\item{method}{Name of method. Default: seriation (uses the optimal leaf ordering algorithm from the seriation package). 
+\item{method}{Name of method. Default: seriation (uses the optimal leaf ordering algorithm from the seriation package).
 Alternatives endlink (order.endlink from gclus) and endlink-global (ignores linkage groups).}
 
 \item{maxSarf}{Maximum number of neighbor to include into SARF extension.}

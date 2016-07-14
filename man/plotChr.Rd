@@ -30,7 +30,7 @@ simTetraGen <- bases2genotypes(simTetra, 4)
 rfMat <- calcRec(simTetraGen, 4)
 split <- splitChr(rfMat, nchr = 7)
 split <- sortLeafs(rfMat, split)
-map <- pullMap(rfMat, split = split) 
-plotChr(map[[1]])  
+map <- pullMap(rfMat, split = split)
+plotChr(map[[1]])
 }
 

@@ -29,6 +29,7 @@ splitChr <-
            filter = FALSE,
            thresh = 0.05,
            rm.dup = TRUE) {
+    if(is.null(rownames(rf))) stop("Please provide rownames for the recombination frequencies.")
     split <- data.frame(names = rownames(rf),
                         split = 1,
                         dup = 0)

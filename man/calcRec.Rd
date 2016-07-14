@@ -7,7 +7,7 @@
 calcRec(input, ploidy, sparse = FALSE, ...)
 }
 \arguments{
-\item{input}{Matrix of genotypes. Rows represent markers. 
+\item{input}{Matrix of genotypes. Rows represent markers.
 Columns represent samples.}
 
 \item{ploidy}{Ploidy level of the organism.}

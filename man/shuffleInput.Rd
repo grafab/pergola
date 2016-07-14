@@ -2,16 +2,12 @@
 % Please edit documentation in R/preprocess.R
 \name{shuffleInput}
 \alias{shuffleInput}
-\title{Randomize marker order and alleles within samples
- 
-In simulated datasets, the order or markers and alleles within samples is often given.
-To remove any prior knowledge, that would not be available, the data should be randomized.
-Thus, the performance of our tool can be validated unbiased.}
+\title{Randomize marker order and alleles within samples}
 \usage{
 shuffleInput(input, ploidy = 4, ignore = 0)
 }
 \arguments{
-\item{input}{Matrix of genotypes. Rows represent markers. 
+\item{input}{Matrix of genotypes. Rows represent markers.
 Columns represent samples.}
 
 \item{ploidy}{Ploidy level of the organism. Default is 4.}
@@ -23,8 +19,6 @@ Matrix of the same size as the input matrix.
 The markers are in a random order and the alleles within the samples are in a random order.
 }
 \description{
-Randomize marker order and alleles within samples
- 
 In simulated datasets, the order or markers and alleles within samples is often given.
 To remove any prior knowledge, that would not be available, the data should be randomized.
 Thus, the performance of our tool can be validated unbiased.

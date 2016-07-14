@@ -16,7 +16,7 @@ This Vignette shows an example usecase for generating a linkage map for polyploi
 
 # Installation
 First, we need to install the package `pergola`.
-Second, we set a seed, to ensure, that this vignette is reproducable.
+Second, we set a seed to ensure that this vignette is reproducable.
 
 
 ```{r}
@@ -57,7 +57,7 @@ simTetraGen[1:5, 1:12]
 
 Now that the data is randomized, we can treat it like real data.
 In the next step we collapse four columns into one.
-That way we have one column per sample, without loosing information.
+That way we have one column per sample without loosing information.
 
 ```{r}
 simTetraGen <- basesToGenotypes(simTetraGen, ploidy = 4)
@@ -90,14 +90,14 @@ axis(side = 2, at = seq(0, 1, length.out = nrow(rf)),
 
 The colors represent the different frequencies (yellow = high, red = low).
 We do not see any structure in the data set, except the diagonal.
-It is red, because each there is no recombination between a marker and itself.
+It is red because each there is no recombination between a marker and itself.
 
 ## Linkage grouping
 Next, we want to find out which marker belongs into which linkage group.
 Usually the number of linkage groups is equal to the number of chromosomes.
 In the beginning of this vignette, we mentioned that our dataset consist of seven chromosomes.
-Now it is time to see, if that can be observed from the data.
-First, we plot a dendogram, the default type of plot in the funtion `splitChr`.
+Now it is time to see if that can be observed from the data.
+We plot a dendogram, the default type of plot in the funtion `splitChr`.
 
 ```{r, fig.show = 'hold', fig.width = 15, fig.height = 5}
 plotRf(rf)
@@ -118,15 +118,15 @@ table(split$split)
 head(split)
 ```
 
-`table()` shows us, how many markers are on each chromosome.
+`table()` shows us how many markers are on each chromosome.
 
 ### Additional parameters
 In case that single markers end up in own linkage groups, one might want to filter them out with the parameter `filter = TRUE`.
-If many markers are highly similar, we removing those duplicates is adviced.
+If many markers are highly similar, removing those duplicates is adviced.
 They have no added value for the linkage map and end up at the same position.
 
 ## Marker ordering
-Now, that we grouped our markers, we want to find the correct order of markers, within the linkage groups.
+Now, that we grouped our markers, we want to find the correct order of markers within the linkage groups.
 Filtered markers (chromosome 0) would be ignored.
 
 ```{r, results = 'hide'}
@@ -146,11 +146,11 @@ axis(side = 2, at = seq(0, 1, length.out = nrow(rf)),
 ```
 
 
-We see, that the order within the chromosomes has improved, because the red values moved closer to the diagonal.
+We see that the order within the chromosomes has improved because the red values moved closer to the diagonal.
 
 ### Example of ambiguous orders
 
-Here we show an example, where two orders are equally good when only one neighbor is included.
+Here we show an example where two orders are equally good when only one neighbor is included.
 
 ```{r}
 set.seed(3)
@@ -189,7 +189,7 @@ Finally, we create the map:
 maps <- pullMap(rf, split)
 ```
 
-We get a list, with one object per chromosome.
+We get a list with one object per chromosome.
 We visualize it with `plotChr()`.
 
 ```{r, fig.show='hold', fig.width = 8, fig.height = 5}
@@ -203,7 +203,7 @@ maps2 <- pullMap(rf, split, fun = "kosambi")
 plotChr(maps[[1]], maps2[[1]], cex = 0.6)
 ```
 
-The map, based on the Kosambi function is smaller, than the default Haldane function.
+The map based on the Kosambi function is smaller than the default Haldane function.
 
 ## Map comparison
 
@@ -213,7 +213,7 @@ library(dendextend)
 library(gclus)
 ```
 
-We create a new map from the existing map `maps2`, because otherwise the two dendograms would be equal.
+We create a new map from the existing map `maps2` because otherwise the two dendograms would be equal.
 ```{r}
 maps3 <- maps2
 maps3[1] <- maps2[2]
@@ -233,7 +233,7 @@ dend1 <- mapToDend(maps)
 plot(dend1, cex = 0.6)
 ```
 
-One is plotted, to show what it looks like.
+One is plotted to show what it looks like.
 
 ```{r}
 dend2 <- mapToDend(maps3)
@@ -241,7 +241,7 @@ dend2 <- mapToDend(maps3)
 
 `maketangle` creates a tanglegram.
 ```{r, fig.show = 'hold', fig.width = 10, fig.height = 15}
-maketangle(dend1, dend2, cutheight = 500, k = 7)
+makeTangle(dend1, dend2, cutheight = 500, k = 7)
 ```
 
 We can easily observe the rearrangements that we did before.
@@ -251,11 +251,11 @@ One map serves as model while the other one is changed.
 ```{r, fig.show = 'hold', fig.width = 10, fig.height = 15}
 maps <- switchChrs(map = maps, comp = maps3)
 maps <- swapChrs(map = maps, comp = maps3)
-dend3 <- map2dend(maps)
-dend4 <- map2dend(maps3)
-maketangle(dend3, dend4, cutheight = 500, k = 7)
+dend3 <- mapToDend(maps)
+dend4 <- mapToDend(maps3)
+makeTangle(dend3, dend4, cutheight = 500, k = 7)
 ```
-We see, that both maps are now perfectly aligned.
+We see that both maps are now perfectly aligned.
 However, the interchromosomal order is not changed.
 
 #Acknowledgement

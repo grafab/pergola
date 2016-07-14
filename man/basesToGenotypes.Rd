@@ -7,14 +7,14 @@
 basesToGenotypes(input, ploidy)
 }
 \arguments{
-\item{input}{Matrix of genotype bases. Rows represent the individual markers. 
+\item{input}{Matrix of genotype bases. Rows represent the individual markers.
 Columns represent samples, dependenden on the ploidy.}
 
-\item{ploidy}{Ploidy level of the organism. 
+\item{ploidy}{Ploidy level of the organism.
 Influences how many columns are collapsed into one.}
 }
 \value{
-Matrix of genotypes. 
+Matrix of genotypes.
 The number of columns is 1/\code{ploidy} of the \code{input}.
 }
 \description{

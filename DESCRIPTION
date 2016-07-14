@@ -23,7 +23,8 @@ Suggests:
     dendextendRcpp,
     Matrix,
     rmarkdown,
-    grDevices
+    grDevices,
+    testthat
 VignetteBuilder: knitr
 RoxygenNote: 5.0.1
 URL: http://github.com/grafab/pergola

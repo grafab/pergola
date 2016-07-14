@@ -23,7 +23,7 @@ simTetrageno <- basesToGenotypes(simTetra, 4)
 rfMat <- calcRec(simTetrageno, 4)
 split <- splitChr(rfMat, nchr = 7)
 split <- sortLeafs(rfMat, split)
-map <- pullMap(rfMat, split = split)   
+map <- pullMap(rfMat, split = split)
 map <- addOffset(map)
 }
 

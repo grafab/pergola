@@ -18,28 +18,35 @@
 #' split <- sortLeafs(rfMat, split)
 #' pullMap(rfMat, split = split)   
 #' @export
-pullMap <- function(rf, split, fun = "haldane", corr = 1){
+pullMap <- function(rf,
+                    split,
+                    fun = "haldane",
+                    corr = 1) {
   fun <- match.arg(fun, c("haldane", "kosambi", "carter", "none"))
   rf <- rf[split$order, split$order]
   msplit <- max(split$split)
   globalMap <- vector(mode = "list", length = msplit)
-  for(i in 1:msplit){
+  for (i in 1:msplit) {
     subset <- which(split$split[split$order] == i)
     lss <- length(subset)
     map <- rep(0, lss)
-    for(j in 2:lss){
+    for (j in 2:lss) {
       map[j] <- rf[subset, subset][j, j - 1]
     }
-    map <- switch(fun, 
-                  haldane = -log(1 - 2 * map) * 100,
-                  kosambi = 0.25 * log((1 + 2 * map) / (1 - 2 * map)) * 100,
-                  carter = 0.25 * (0.5 * (log(1 + 2 * map) - log(1 - 2 * map)) + atan(2 * map)) * 100,
-                  none = map)
+    map <- switch(
+      fun,
+      haldane = -log(1 - 2 * map) * 100,
+      kosambi = 0.25 * log((1 + 2 * map) / (1 - 2 * map)) * 100,
+      carter = 0.25 * (0.5 * (log(1 + 2 * map) - log(1 - 2 * map)) + atan(2 * map)) * 100,
+      none = map
+    )
     map <- cumsum(map) * corr
-    names(map) <- split$names[split$order][split$split[split$order] == i]
-    if(any(is.infinite(map))) map <- map[!is.infinite(map)]
+    names(map) <-
+      split$names[split$order][split$split[split$order] == i]
+    if (any(is.infinite(map)))
+      map <- map[!is.infinite(map)]
     globalMap[[i]] <- map
-  }  
+  }
   return(globalMap)
 }
 
@@ -63,8 +70,9 @@ pullMap <- function(rf, split, fun = "haldane", corr = 1){
 #' map <- switchChrs(map, map2)
 #' 
 #' @export
-switchChrs <- function(map, comp){
-  lapply(map, function(x) switchChr(x, comp))
+switchChrs <- function(map, comp) {
+  lapply(map, function(x)
+    switchChr(x, comp))
 }
 
 #' Switch Chromosomes
@@ -77,7 +85,7 @@ switchChrs <- function(map, comp){
 #' @param comp Other map for comparison.
 #' @return map
 #' @keywords internal
-switchChr <- function(map, comp){
+switchChr <- function(map, comp) {
   markers <- names(map)
   matchchr <- findChr(markers, comp)
   nmark <- length(markers)
@@ -92,7 +100,7 @@ switchChr <- function(map, comp){
   fb <- sum(front %in% back2)
   bf <- sum(back %in% front2)
   bb <- sum(back %in% back2)
-  if(ff < fb && bb < bf){
+  if (ff < fb && bb < bf) {
     offs <- map[1] + map[length(map)]
     map <- offs - map
     return(rev(map))
@@ -108,8 +116,9 @@ switchChr <- function(map, comp){
 #' @param comp Other map for comparison.
 #' @return map
 #' @keywords internal
-findChr <- function(map, comp){
-  matches <- sapply(comp, function(x) sum(names(x) %in% map))
+findChr <- function(map, comp) {
+  matches <- sapply(comp, function(x)
+    sum(names(x) %in% map))
   which(matches == max(matches))[1]
 }
 
@@ -131,11 +140,12 @@ findChr <- function(map, comp){
 #' map2 <- pullMap(rfMat, split = split)   
 #' map <- swapChrs(map, map2)
 #' @export
-swapChrs <- function(map, comp){
-  chrs <- sapply(map, function(x) findChr(names(x), comp))
-  if(any(duplicated(chrs))){
+swapChrs <- function(map, comp) {
+  chrs <- sapply(map, function(x)
+    findChr(names(x), comp))
+  if (any(duplicated(chrs))) {
     warning("Not all chromosomes could be matched with their corresponding chromosome.")
-  }else{
+  } else{
     map <- map[order(chrs)]
   }
   map
@@ -163,26 +173,26 @@ swapChrs <- function(map, comp){
 #' dend <- mapToDend(map)  
 #' plot(dend)
 #' @export
-mapToDend<-function(map, mergeoff = 0L){
+mapToDend <- function(map, mergeoff = 0L) {
   if (!requireNamespace("dendextend", quietly = TRUE)) {
     stop("dendextend needed for this function to work. Please install it.",
          call. = FALSE)
   }
   nChr <- length(map)
   mergeval <- (1:nChr) * mergeoff + max(unlist(map)) * 1.2
-  nMar<-sapply(map, length)
+  nMar <- sapply(map, length)
   out <- NULL
-  for(i in 1:nChr){
+  for (i in 1:nChr) {
     hclu <- hclust(dist(map[[i]]), method = "complete")
     dend <- as.dendrogram(hclu)
     dend <- dendextend::rotate(dend, names(map[[i]]))
-    if(is.null(out)){
+    if (is.null(out)) {
       out <- dend
-    }else{
+    } else{
       out <- merge(out, dend, height = mergeval[i])
     }
   }
-  return(out)  
+  return(out)
 }
 
 #' Add offset
@@ -199,13 +209,14 @@ mapToDend<-function(map, mergeoff = 0L){
 #' rfMat <- calcRec(simTetrageno, 4)
 #' split <- splitChr(rfMat, nchr = 7)
 #' split <- sortLeafs(rfMat, split)
-#' map <- pullMap(rfMat, split = split)   
+#' map <- pullMap(rfMat, split = split)
 #' map <- addOffset(map)
 #' @export
-addOffset<-function(map, offset = 0.1){
-  for(i in 1:length(map)){
-    while(any(duplicated(map[[i]]))){
-      map[[i]][duplicated(map[[i]])]<-map[[i]][duplicated(map[[i]])] + offset
+addOffset <- function(map, offset = 0.1) {
+  for (i in 1:length(map)) {
+    while (any(duplicated(map[[i]]))) {
+      map[[i]][duplicated(map[[i]])] <-
+        map[[i]][duplicated(map[[i]])] + offset
     }
   }
   map

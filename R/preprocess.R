@@ -42,7 +42,7 @@ shuffleInput <- function(input,
                          ploidy = 4,
                          ignore = 0) {
   numbMark <- nrow(input)
-  numbSamp <- ncol(input) / ploidy
+  numbSamp <- (ncol(input) - ignore) / ploidy
   if (numbSamp %% 1 != 0) {
     stop(
       "Number of columns (",

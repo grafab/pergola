@@ -1,0 +1,12 @@
+pergola 1.1.0 (2016-02-21)
+--------------------------------------------------------------------
+Several functions renamed to comply with naming conventions
+Unit testing with testthat
+Code reformated
+Vignette updated
+Semantic versioning
+NEWS file included
+
+pergola 1.0 (2016-02-21)
+--------------------------------------------------------------------
+First release

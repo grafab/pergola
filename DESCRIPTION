@@ -2,7 +2,7 @@ Package: pergola
 Type: Package
 Title: Toolbox for Polyploid Genetic Data
 Version: 1.1.0
-Date: 2016-03-31
+Date: 2016-07-18
 Authors@R: c(person("Fabian", "Grandke", email = "grafabian@gmail.com",
   role = c("aut", "cre")),
   person("Dirk", "Metzler", email = "metzler@bio.lmu.de",

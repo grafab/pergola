@@ -174,6 +174,7 @@ plotChr <-
 #'
 #' Create tanglegram. Removes markers, that are not in both trees.
 #' Calculates alternating light and dark shades of grey.
+#' This function is a wrapper to functions of \pkg{dendextend}
 #'
 #' @param dend1 First dendrogram. Required.
 #' @param dend2 Second dendrogram. Required.
@@ -182,6 +183,8 @@ plotChr <-
 #' @param ncol Number of desired colors.
 #' @param ... Other parameters are forwarded to the tanglegram command.
 #' @return None. Plotting only.
+#' @references Galili T. (2015), dendextend: an R package for visualizing, 
+#' adjusting and comparing trees of hierarchical clustering, Bioinformatics
 #' @examples
 #' data(simTetra)
 #' simTetraGen <- basesToGenotypes(simTetra, 4)

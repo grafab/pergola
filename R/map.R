@@ -178,20 +178,27 @@ mapToDend <- function(map, mergeoff = 0L) {
     stop("dendextend needed for this function to work. Please install it.",
          call. = FALSE)
   }
+  if(!is.list(map)) stop("map object is not a list. Please provide a list.",
+                         call. = FALSE)
   nChr <- length(map)
-  mergeval <- (1:nChr) * mergeoff + max(unlist(map)) * 1.2
-  nMar <- sapply(map, length)
-  out <- NULL
-  for (i in 1:nChr) {
-    hclu <- hclust(dist(map[[i]]), method = "complete")
-    dend <- as.dendrogram(hclu)
-    dend <- dendextend::rotate(dend, names(map[[i]]))
-    if (is.null(out)) {
-      out <- dend
-    } else{
-      out <- merge(out, dend, height = mergeval[i])
+  if(nChr == 1){
+    out <- as.dendrogram(hclust(dist(map[[1]])))
+  }else{
+    mergeval <- (1:nChr) * mergeoff + max(unlist(map)) * 1.2
+    nMar <- sapply(map, length)
+    out <- NULL
+    for (i in 1:nChr) {
+      hclu <- hclust(dist(map[[i]]), method = "complete")
+      dend <- as.dendrogram(hclu)
+      dend <- dendextend::rotate(dend, names(map[[i]]))
+      if (is.null(out)) {
+        out <- dend
+      } else{
+        out <- merge(out, dend, height = mergeval[i])
+      }
     }
   }
+
   return(out)
 }
 

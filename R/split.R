@@ -68,6 +68,11 @@ splitChr <-
       if (filter) {
         filtClust <- which(table(output) < minleaves)
         output[output %in% filtClust] <- 0
+        if(any(output == 0)){
+          tmp <- as.factor(output)
+          levels(tmp) <- 0:(length(levels(tmp))-1)
+          output <- as.numeric(as.character(tmp))
+        }
       }
     }
     split$split[split$split > 0] <- output
